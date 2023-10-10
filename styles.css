@@ -1,0 +1,151 @@
+/*Now the CSS*/
+* {margin: 0; padding: 0;}
+/* Center the container on the desktop */
+.container {
+	padding-top: 0px;
+	margin-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35vh; /* Ensure the container takes the full viewport height */
+}
+
+/* Rest of your existing CSS styles */
+
+
+.tree ul {
+	padding-top: 20px; position: relative;
+	
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+.tree li {
+	float: left; text-align: center;
+	list-style-type: none;
+	position: relative;
+	padding: 20px 5px 0 5px;
+	
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+/*We will use ::before and ::after to draw the connectors*/
+
+.tree li::before,
+.tree li::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 50%;
+    border-top: 1.5px solid; /* Increase border thickness */
+    width: 50%;
+    height: 20px;
+}
+.tree li::after {
+    right: auto;
+    left: 50%;
+    border-left: 2px solid ; /* Increase border thickness */
+}
+
+/*We need to remove left-right connectors from elements without 
+any siblings*/
+.tree li:only-child::after, .tree li:only-child::before {
+	display: none;
+}
+
+/*Remove space from the top of single children*/
+.tree li:only-child{ padding-top: 0;}
+
+/*Remove left connector from first child and 
+right connector from last child*/
+.tree li:first-child::before, .tree li:last-child::after{
+	border: 0 none;
+}
+/*Adding back the vertical connector to the last nodes*/
+.tree li:last-child::before{
+	border-right: 1px solid black;
+	border-radius: 0 5px 0 0;
+	-webkit-border-radius: 0 5px 0 0;
+	-moz-border-radius: 0 5px 0 0;
+}
+.tree li:first-child::after{
+	border-radius: 5px 0 0 0;
+	-webkit-border-radius: 5px 0 0 0;
+	-moz-border-radius: 5px 0 0 0;
+}
+
+/*Time to add downward connectors from parents*/
+.tree ul ul::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border-left: 2px solid black; /* Increase border thickness */
+    width: 0;
+    height: 20px;
+}
+
+.tree li a {
+    font-family: "Open Sans", sans-serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000;
+    cursor: pointer;
+    border: 3px solid;
+    padding: 0.25em 0.5em;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    display: inline-block; /* Ensure buttons are displayed inline */
+    margin-right: 5px; /* Add some spacing between buttons */
+}
+
+/*Time for some hover effects*/
+/*We will apply the hover effect the the lineage of the element also*/
+.tree li a:hover, .tree li a:hover+ul li a {
+	background: black; color: white; border: 1px solid;
+}
+/*Connector styles on hover*/
+.tree li a:hover+ul li::after, 
+.tree li a:hover+ul li::before, 
+.tree li a:hover+ul::before, 
+.tree li a:hover+ul ul::before{
+	border-color:  red;
+}
+/* Add this CSS code */
+.tree ul ul ul ul ul li {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 150px; /* Set a fixed width for grandchild list items */
+    white-space: nowrap; /* Prevent text from wrapping to the next line */
+}
+.tree li a:active {
+    box-shadow: 0px 0px 0px 0px;
+    top: 5px;
+    left: 5px;
+}
+@media (min-width: 768px) {
+    .tree li a {
+        padding: 0.25em 0.75em;
+    }
+}
+/* Add this CSS code to your existing stylesheet */
+.h1 {
+    text-align: center;
+    margin-bottom: 10px; /* Adjust this value as needed to reduce the gap */
+}
+
+
+
+
+/*Thats all. I hope you enjoyed it.
+Thanks :)*/
